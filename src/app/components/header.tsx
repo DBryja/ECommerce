@@ -5,6 +5,8 @@ export default  function Header(){
         <div className={"w-full h-32 flex flex-row p-8 justify-left gap-x-2"}>
             <Link href={"/"} className={"font-bold"}>Home</Link>
             <Link href={"/admin/products/add"}>AdminProductsAdd</Link>
+            <Link href={"/admin/signIn"}>AdminSignIn</Link>
+            <Link href={"/admin/addEmployee"}>AddEmployee</Link>
         </div>
     )
 }

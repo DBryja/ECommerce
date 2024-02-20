@@ -6,22 +6,8 @@ import {z} from "zod";
 import path from "path";
 import {writeFile} from "fs/promises";
 import fs from "fs";
+import {errorHandling} from "@/utils";
 
-const errorHandling = (err: unknown) => {
-    if(err instanceof Error){
-        return {
-            errors: {
-                _form: [err.message]
-            }
-        }
-    }else{
-        return{
-            errors:{
-                _form: ["Unknown error"]
-            }
-        };
-    }
-}
 
 const createProductSchema = z.object({
     name: z.string().min(3),

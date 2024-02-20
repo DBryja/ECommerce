@@ -1,12 +1,10 @@
 'use client'
-import React, {useRef, useState} from 'react';
+import React, {useRef} from 'react';
 import {useFormState} from "react-dom";
 import * as actions from "@/actions/products";
 
-export default function productsAddPage(){
-    // eslint-disable-next-line react-hooks/rules-of-hooks
+export default function ProductsAddPage(){
     const imagesRef = useRef<HTMLInputElement>(null);
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [formState, action] = useFormState(actions.createProduct, {errors: {}});
     const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();

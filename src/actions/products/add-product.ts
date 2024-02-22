@@ -53,7 +53,6 @@ export async function createProduct(formState : CreateProductFormState, formData
             price: result.data.price,
             description: result.data.description,
             filters: result.data.filters,
-            image: "aaaaaaa.jpg",
             quantity: result.data.quantity,
             sold: 0,
             categoryId: result.data.category,

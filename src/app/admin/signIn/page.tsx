@@ -1,10 +1,11 @@
 'use client'
 
-import {useFormState} from "react-dom";
+import {useFormState, useFormStatus} from "react-dom";
+import {authenticate} from "@/actions/auth";
 import * as actions from "@/actions/auth";
 
 export default function SignIn(){
-    const [formState, action] = useFormState(actions.signInEmployee, {errors: {}});
+    const [errorMessage, action] = useFormState(actions.authenticate, undefined);
 
     return (
         <div>
@@ -13,6 +14,9 @@ export default function SignIn(){
                 <input type="password" placeholder="Password" name="password"/>
                 <button type="submit">Sign In</button>
             </form>
+            <div>
+                {errorMessage}
+            </div>
         </div>
     )
 }

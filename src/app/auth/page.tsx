@@ -10,7 +10,7 @@ export default function SignIn(){
     return (
         <div>
             <form className={"flex flex-col gap-y-2 w-96"} action={action}>
-                <input type="text" placeholder="Login" name="login"/>
+                <input type="text" placeholder="email" name="email"/>
                 <input type="password" placeholder="Password" name="password"/>
                 <button type="submit">Sign In</button>
             </form>

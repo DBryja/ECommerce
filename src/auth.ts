@@ -11,23 +11,35 @@ export const { auth, signIn, signOut } = NextAuth({
         Credentials({
             async authorize(credentials, request) {
                 const parsedCredentials = z
-                    .object({login: z.string(), password: z.string()})
+                    .object({email: z.string().email(), password: z.string()})
                     .safeParse(credentials);
 
+                console.log(parsedCredentials);
+
                 if(parsedCredentials.success){
-                    const {login, password} = parsedCredentials.data;
-                    const employee = await db.employee.findUnique({
+                    const {email, password} = parsedCredentials.data;
+                    const client = await db.user.findUnique({
                         where: {
-                            login,
+                            email,
                         }
                     });
-                    if(!employee) return null;
+                    if(!client) return null;
 
-                    const match = await bcrypt.compare(password, employee.password);
+                    const match = await bcrypt.compare(password, client.password);
+                    const role = await db.roles.findUnique({
+                        where: {
+                            id: client.role
+                        }
+                    });
+                    if(!role || !role.name){
+                        console.log("Role not found");
+                        return null;
+                    }
+
                     if(match){
                         const user: Session["user"] = {
-                            name: employee.login,
-                            email: "email",
+                            name: role.name,
+                            email: client.email,
                         }
                         return user;
                     } else {

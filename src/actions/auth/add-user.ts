@@ -2,29 +2,28 @@
 import {errorHandling} from "@/utils";
 import {z} from "zod";
 import {db} from "@/db";
-import {Employee} from "@prisma/client";
 import bcrypt from "bcrypt";
 
-interface addEmployeeFormState {
+interface addUserFormState {
     errors: {
-        login?: string[];
+        email?: string[];
         password?: string[];
         confirmPassword?: string[];
         _form?: string[];
     };
 }
 
-const addEmployeeFormState = z.object({
-    login: z.string().min(3),
+const addUserFormState = z.object({
+    email: z.string().email(),
     password: z.string().min(8),
     confirmPassword: z.string().min(8),
 }).superRefine(({password, confirmPassword}) => {
     if (password !== confirmPassword)
         return {confirmPassword: ["Passwords do not match"]};
 });
-export async function addEmployee(formState : addEmployeeFormState, formData : FormData) : Promise<addEmployeeFormState> {
-    const result = addEmployeeFormState.safeParse({
-        login: formData.get("login"),
+export async function addUser(formState : addUserFormState, formData : FormData, roleId :number = 0) : Promise<addUserFormState> {
+    const result = addUserFormState.safeParse({
+        email: formData.get("email"),
         password: formData.get("password"),
         confirmPassword: formData.get("confirmPassword"),
     });
@@ -36,10 +35,11 @@ export async function addEmployee(formState : addEmployeeFormState, formData : F
     const hashedPassword = await bcrypt.hash(password, 10);
 
     try {
-        await db.employee.create({
+        await db.user.create({
             data: {
-                login: result.data.login,
+                email: result.data.email,
                 password: hashedPassword,
+                role: roleId, //id of role admin
             }
         });
     } catch (e) {

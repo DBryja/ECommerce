@@ -12,11 +12,10 @@ import paths from "@/paths";
 
 const createProductSchema = z.object({
     name: z.string().min(3),
-    price: z.number().min(0),
+    price: z.number().min(0).max(1000000),
     description: z.string().min(10),
-    quantity: z.number().min(0),
+    quantity: z.number().min(1),
     category: z.number().min(1),
-    // image: z.instanceof(File),
 });
 
 interface CreateProductFormState {
@@ -28,9 +27,9 @@ interface CreateProductFormState {
         images?: string[];
         _form?: string[];
     };
+    success?: boolean;
 }
 
-// TODO: Add admin authentication
 export async function createProduct(formState : CreateProductFormState, formData : FormData) : Promise<CreateProductFormState> {
     const result = createProductSchema.safeParse({
         name: formData.get("name"),
@@ -40,9 +39,11 @@ export async function createProduct(formState : CreateProductFormState, formData
         category: Number(formData.get("category")),
     });
 
-    if (!result.success)
-        return {errors: result.error.flatten().fieldErrors};
 
+    if (!result.success)
+        return {
+            errors: result.error.flatten().fieldErrors
+    };
     //move images to product directory
     let images: File[] = [];
     // @ts-ignore
@@ -50,11 +51,12 @@ export async function createProduct(formState : CreateProductFormState, formData
         if(pair[0] === "image")
             images.push(pair[1]);
     }
-    if(!images) return{
-        errors:{
-            images: ["No images received"]
-        }
-    };
+    if(images.length < 1)
+        return {
+            errors: {
+                images: ["At least one image is required"]
+            }
+        };
 
     let product: Product | undefined;
     try {
@@ -95,6 +97,5 @@ export async function createProduct(formState : CreateProductFormState, formData
         }
     }
     
-    return {errors: {}};
-
+    return {errors: {}, success: true};
 }

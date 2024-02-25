@@ -8,6 +8,7 @@ interface IFetchProducts{
     priceMax: number | undefined;
 }
 export const fetchProducts = ({categoryId, priceMin, priceMax} : IFetchProducts) : Promise<Product[]> => {
+    if (categoryId === 0) categoryId = undefined;
     return db.product.findMany({
         where: {
             categoryId,

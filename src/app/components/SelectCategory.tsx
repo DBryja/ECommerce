@@ -7,6 +7,7 @@ export default async function SelectCategory() {
 
     return (
         <select name="category">
+            <option key={0} value={0}>Wszystkie</option>
             {categories?.map((category) => {
                 return <option key={category.id} value={category.id}>{category.name}</option>
             })}

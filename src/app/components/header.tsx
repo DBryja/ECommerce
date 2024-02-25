@@ -9,9 +9,10 @@ export default async function Header(){
     return (
         <div className={"w-full h-32 flex flex-row p-8 justify-left gap-x-2"}>
             <Link href={"/"} className={"font-bold"}>Home</Link>
-            <Link href={"/admin/dashboard"}>AdminDashboard</Link>
+            <Link href={"/shop"}>Sklep</Link>
             <Link href={"/auth"}>SignIn</Link>
             <Link href={"/auth/register"}>Register</Link>
+            <Link href={"/admin/dashboard"}>AdminDashboard</Link>
 
             {session?.user &&
                 <form action={async () => {

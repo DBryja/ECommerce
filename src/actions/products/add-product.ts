@@ -25,6 +25,7 @@ interface CreateProductFormState {
         description?: string[];
         quantity?: string[];
         images?: string[];
+        category?: string[];
         _form?: string[];
     };
     success?: boolean;

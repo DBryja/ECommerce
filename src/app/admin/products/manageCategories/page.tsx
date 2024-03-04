@@ -1,6 +1,5 @@
-import {fetchCategories, removeCategory} from "@/db/queries";
+import {fetchCategories, removeCategory} from "@/actions/products";
 import React from "react";
-import SelectCategory from "@/app/components/SelectCategory";
 import AddCategoryForm from "@/app/components/AddCategoryForm";
 import RemoveCategoryButton from "@/app/components/RemoveCategoryButton";
 

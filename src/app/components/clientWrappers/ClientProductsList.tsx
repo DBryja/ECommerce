@@ -1,46 +1,34 @@
 'use client'
-import React, {useState, useEffect, useRef} from "react";
-import {fetchProducts} from "@/db/queries";
+import React, {Suspense} from "react";
 import {Product} from "@prisma/client";
 import ProductsList from "@/app/components/ProductsList";
+import {UseSearch} from "@/utils";
+import Input from "@/app/components/Input";
+import type {SearchParams} from "@/actions/products";
+
 
 export default function ClientProductsList({children}:{children: React.ReactNode}){
-    const [products, setProducts] = useState<Product[]>([] as Product[]);
-    const formRef = useRef<HTMLFormElement>(null);
-    const fetchAndSetProducts = async (filters: any) => {
-        const products = await fetchProducts(filters);
-        setProducts(products);
-    }
-
-    useEffect(()=>{
-        const filters = {
-            categoryId: undefined,
-            priceMin: undefined,
-            priceMax: undefined,
-        }
-        fetchAndSetProducts(filters);
-    }, [])
-    const onSubmit = async (e : React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        const formData = new FormData(e.currentTarget);
-        const filters = {
-            categoryId: Number(formData.get("category")) || undefined,
-            priceMin: Number(formData.get("priceMin")) || undefined,
-            priceMax: Number(formData.get("priceMax")) || undefined,
-        }
-        await fetchAndSetProducts(filters);
+    const {handleSearch, searchParams} = UseSearch();
+    let values :SearchParams = {};
+    values = {
+        category: Number(searchParams.get("category")) || 0,
+        priceMin: Number(searchParams.get("priceMin")) || undefined,
+        priceMax: Number(searchParams.get("priceMax")) || undefined
     }
 
     return (
         <div>
-            <form onSubmit={onSubmit} className={"flex flex-col gap-y-4 w-96"} ref={formRef}>
-                {children}
-                <input type="number" name="priceMin" placeholder="Min price"/>
-                <input type="number" name="priceMax" placeholder="Max price"/>
-                <button type="submit">Find Products</button>
+            <form className={"flex flex-col gap-y-4 w-96"} action={""}>
+                <select className={"text-sm sm:text-base relative w-full border rounded placeholder-gray-400 focus:border-indigo-400 focus:outline-none py-2 px-2"} name="category" onChange={handleSearch} defaultValue={values.category}>
+                    {children}
+                </select>
+                <Input type="number" name="priceMin" placeholder="Min price" onChange={handleSearch} defaultValue={values.priceMin}/>
+                <Input type="number" name="priceMax" placeholder="Max price" onChange={handleSearch} defaultValue={values.priceMax}/>
             </form>
 
-            <ProductsList products={products} />
+            <Suspense fallback={"Waiting for products"}>
+                <ProductsList params={values}/>
+            </Suspense>
         </div>
     )
 }

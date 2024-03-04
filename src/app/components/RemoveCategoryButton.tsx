@@ -1,5 +1,5 @@
 "use client"
-import {removeCategory} from "@/db/queries";
+import {removeCategory} from "@/actions/products";
 import React from "react";
 
 export default function RemoveCategoryButton({id}:{id: number}) {

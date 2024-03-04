@@ -8,12 +8,12 @@ export const authConfig = {
         authorized({auth, request: {nextUrl}}){
             const isLoggedIn = !!auth?.user;
             const isAdmin = auth?.user.name === "admin" //must be using name instead of role
-            const isOnDashboard = nextUrl.pathname.startsWith("/admin/dashboard") || nextUrl.pathname.startsWith("/products");
+            const isOnDashboard = nextUrl.pathname.startsWith("/admin") || nextUrl.pathname.startsWith("/products");
 
             //adminPath
             if(isAdmin){
                 if(isOnDashboard) return isLoggedIn;
-                else if(isLoggedIn) return Response.redirect(new URL('/admin/dashboard', nextUrl));
+                else if(isLoggedIn) return Response.redirect(new URL('/admin', nextUrl));
             }
             //userPath
             else {

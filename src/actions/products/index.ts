@@ -5,5 +5,6 @@ export {fetchCategories} from "./fetch-categories";
 export {removeCategory} from "./remove-category";
 export {removeProduct} from "./remove-product";
 export {fetchProduct} from "./fetch-product";
+export {addToCart} from "./add-to-cart";
 
 export type {SearchParams} from "./fetch-products";

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Header from "@/app/components/header";
+import ShoppingCart from "@/app/components/ShoppingCart";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -18,6 +19,8 @@ export default async function RootLayout({
       <body className={"bg-gray-600 w-full h-full vsc-initialized"}>
         <Header/>
         {children}
+
+        <ShoppingCart/>
       </body>
     </html>
   );

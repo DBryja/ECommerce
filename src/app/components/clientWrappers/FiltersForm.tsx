@@ -1,13 +1,11 @@
 'use client'
 import React, {Suspense} from "react";
-import {Product} from "@prisma/client";
-import ProductsList from "@/app/components/ProductsList";
 import {UseSearch} from "@/utils";
 import Input from "@/app/components/Input";
 import type {SearchParams} from "@/actions/products";
 
 
-export default function ClientProductsList({children}:{children: React.ReactNode}){
+export default function FiltersForm({children}:{children: React.ReactNode}){
     const {handleSearch, searchParams} = UseSearch();
     let values :SearchParams = {};
     values = {
@@ -25,10 +23,6 @@ export default function ClientProductsList({children}:{children: React.ReactNode
                 <Input type="number" name="priceMin" placeholder="Min price" onChange={handleSearch} defaultValue={values.priceMin}/>
                 <Input type="number" name="priceMax" placeholder="Max price" onChange={handleSearch} defaultValue={values.priceMax}/>
             </form>
-
-            <Suspense fallback={"Waiting for products"}>
-                <ProductsList params={values}/>
-            </Suspense>
         </div>
     )
 }

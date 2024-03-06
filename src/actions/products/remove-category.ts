@@ -7,6 +7,16 @@ import {errorHandling} from "@/utils";
 
 export async function removeCategory(id:number) {
     try{
+        const products = await db.product.findMany({
+            where: {
+                categoryId: id,
+            }
+        })
+
+        if(products.length > 0){
+            return {errors: {category: ["Category is not empty"]}};
+        }
+
         await db.category.delete({
             where: {
                 id,

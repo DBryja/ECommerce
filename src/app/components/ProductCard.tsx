@@ -4,8 +4,7 @@ import {Product} from "@prisma/client";
 import React, {useRef} from "react";
 import Image from "next/image";
 import {usePathname} from "next/navigation";
-import {removeProduct} from "@/actions/products";
-
+// import {removeProduct} from "@/actions/products";
 
 export default function ProductCard({product, noAction}:{product: Product, noAction?: boolean}) {
     const cardRef = useRef<HTMLDivElement>(null);
@@ -34,7 +33,7 @@ export default function ProductCard({product, noAction}:{product: Product, noAct
             <div className={"flex flex-row gap-x-4"}>
             {!noAction && images.map((image) => image)}
             </div>
-            {isAdmin && !noAction && <button onClick={()=>removeProduct(product.id)} className={"bg-red-500"}>Delete</button>}
+            {/*{isAdmin && !noAction && <button onClick={()=>removeProduct(product.id)} className={"bg-red-500"}>Delete</button>}*/}
         </div>
     )
 }

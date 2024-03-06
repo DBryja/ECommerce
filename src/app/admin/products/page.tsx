@@ -1,5 +1,5 @@
 import SelectCategory from "@/app/components/SelectCategory";
-import ClientProductsList from "@/app/components/clientWrappers/ClientProductsList";
+import FiltersForm from "@/app/components/clientWrappers/FiltersForm";
 import type {SearchParams} from "@/actions/products";
 import React, {Suspense} from "react";
 import ProductsList from "@/app/components/ProductsList";
@@ -12,9 +12,9 @@ export default function ProductsPage({searchParams}: { searchParams: SearchParam
     }
 
     return <div className={"w-1/2"}>
-        <ClientProductsList >
+        <FiltersForm >
             <SelectCategory/>
-        </ClientProductsList>
+        </FiltersForm>
 
         <Suspense fallback={"Waiting for products"}>
             <ProductsList params={values} />

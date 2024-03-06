@@ -8,6 +8,7 @@ import type {SearchParams} from "@/actions/products";
 interface IProductsList {
     params: SearchParams
 }
+//@ts-ignore
 export default async function ProductsList({params}: IProductsList){
     const products = await fetchProducts(params);
 

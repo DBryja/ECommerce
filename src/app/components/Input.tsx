@@ -1,4 +1,4 @@
-type InputType = "text" | "number" | "password" | "email" | "file";
+type InputType = "text" | "number" | "password" | "email" | "file" | "submit";
 interface InputProps {
     name: string;
     id?: string;
@@ -25,6 +25,7 @@ export default function Input({name, placeholder, label, errors, type, defaultVa
                        type={type}
                        placeholder={placeholder}
                        defaultValue={defaultValue}
+                       value={type === "submit" ? defaultValue : undefined}
                        onChange={onChange}
                        className="text-sm sm:text-base relative w-full border rounded placeholder-gray-400 focus:border-indigo-400 focus:outline-none py-2 px-2"/>
 

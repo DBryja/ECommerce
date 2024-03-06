@@ -2,6 +2,7 @@
 import {useFormState} from "react-dom";
 import * as actions from "@/actions/auth";
 import React from "react";
+import Input from "@/app/components/Input";
 
 type Role = "admin" | "customer";
 interface AddUserFormProps {
@@ -13,15 +14,11 @@ export default function AddUserForm({role}: AddUserFormProps){
 
     return (
         <div>
-            <h1>{formState.errors.email}</h1>
-            <h1>{formState.errors.password}</h1>
-            <h1>{formState.errors.confirmPassword}</h1>
-            <h1>{formState.errors._form}</h1>
             <form className={"flex flex-col gap-y-2 w-96"} action={action}>
-                <input type="text" placeholder="Email" name="email"/>
-                <input type="password" placeholder="Password" name="password"/>
-                <input type="password" placeholder="Confirm Password" name="confirmPassword"/>
-                <button type="submit">Add {role}</button>
+                <Input type="text" name="email" placeholder="Email" errors={formState.errors.email}/>
+                <Input  type="password" name="password" placeholder="Password" errors={formState.errors.password}/>
+                <Input type="password" name="confirmPassword" placeholder="Confirm Password" errors={formState.errors.confirmPassword}/>
+                <button type="submit" className={"bg-blue-200 px-5 py-3"}>Add {role}</button>
             </form>
         </div>
     )

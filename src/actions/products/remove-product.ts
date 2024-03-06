@@ -19,5 +19,6 @@ export async function removeProduct(id:number) {
         errorHandling(e);
     }
     revalidatePath(paths.adminProducts());
+    revalidatePath(paths.singleProduct(id));
     // return {errors: {}};
 }

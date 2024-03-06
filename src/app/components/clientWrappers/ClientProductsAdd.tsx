@@ -41,7 +41,7 @@ export default function ClientProductsAdd({children}: {children: React.ReactNode
                        errors={formState.errors.description} defaultValue={"description of a product"}/>
                 <Input onChange={inputOnChange} type="number" name="quantity" placeholder="Product Quantity" errors={formState.errors.quantity}
                        defaultValue={"1000"}/>
-                <select onChange={inputOnChange} name="category" defaultValue={0}>
+                <select onChange={inputOnChange} name="category" defaultValue={0} className={"text-sm sm:text-base relative w-full border rounded placeholder-gray-400 focus:border-indigo-400 focus:outline-none py-2 px-2"}>
                     {children}
                 </select>
                 {formState.errors.category?.map((error, index) => <p key={index} className="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1">{error}</p>)}

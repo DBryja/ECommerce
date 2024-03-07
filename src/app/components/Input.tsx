@@ -1,4 +1,4 @@
-type InputType = "text" | "number" | "password" | "email" | "file" | "submit";
+type InputType = "text" | "number" | "password" | "email" | "file" | "submit" | "tel";
 interface InputProps {
     name: string;
     id?: string;

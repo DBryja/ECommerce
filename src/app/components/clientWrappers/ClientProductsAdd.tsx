@@ -10,11 +10,11 @@ export default function ClientProductsAdd({children}: {children: React.ReactNode
     const [formState, action] = useFormState(actions.createProduct, {errors: {}, success: false});
     const imagesRef = useRef<HTMLInputElement>(null);
     const formRef = useRef<HTMLFormElement>(null);
-    const succesRef = useRef<HTMLParagraphElement>(null);
+    const success = useRef<HTMLParagraphElement>(null);
     const [formValuesState, setFormValuesState] = useState({name: "", price: 0, description: "", quantity: 0, category: 0});
    const inputOnChange = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>) => {
         setFormValuesState({...formValuesState, [e.target.name]: e.target.value});
-       if(succesRef.current) succesRef.current?.remove();
+       if(success.current) success.current?.remove();
    }
 
     const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -46,7 +46,7 @@ export default function ClientProductsAdd({children}: {children: React.ReactNode
                 </select>
                 {formState.errors.category?.map((error, index) => <p key={index} className="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1">{error}</p>)}
                 <input onChange={inputOnChange} type="file" name="image" accept={"image/*"} multiple required={true}/>
-                <button type="submit" className={"bg-blue-200 px-5 py-3"}>Dodaj</button>
+                <button type="submit" className={"bg-blue-200 px-5 py-3"}>Add</button>
             </form>
 
             <ProductCard noAction={true}
@@ -58,7 +58,7 @@ export default function ClientProductsAdd({children}: {children: React.ReactNode
                              categoryId: formValuesState.category,
                              sold: 0,
                              imageQty: 0}}/>
-            {formState.success && <p className={"text-green-500"} ref={succesRef}>Produkt dodany pomyślnie.</p>}
+            {formState.success && <p className={"text-green-500"} ref={success}>Product added succesfully.</p>}
         </div>
     );
 }

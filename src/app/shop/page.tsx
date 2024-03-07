@@ -12,8 +12,7 @@ export default function Shop({searchParams}: { searchParams: SearchParams }) {
     }
 
     return (
-        <div>
-            <h1>Shop</h1>
+        <div className={"flex flex-col mx-8 gap-y-5 w-3/4"}>
             <FiltersForm >
                 <SelectCategory/>
             </FiltersForm>

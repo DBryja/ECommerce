@@ -1,5 +1,7 @@
 import {useDebouncedCallback} from "use-debounce";
 import {useSearchParams, usePathname, useRouter} from "next/navigation";
+import {ReadonlyRequestCookies} from "next/dist/server/web/spec-extension/adapters/request-cookies";
+import {RequestCookie} from "next/dist/compiled/@edge-runtime/cookies";
 
 
 export const errorHandling = (err: unknown) => {
@@ -39,5 +41,10 @@ export const UseSearch = () => {
     }, 300);
 
     return {handleSearch, searchParams};
+}
+
+
+export const itemsInCart = (cookies : RequestCookie[]) => {
+    return cookies.filter(obj => obj.name.startsWith('item_'));
 }
 

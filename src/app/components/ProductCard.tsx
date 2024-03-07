@@ -5,6 +5,7 @@ import React, {useRef} from "react";
 import Image from "next/image";
 import {usePathname} from "next/navigation";
 import {addToCart} from "@/actions/products";
+import Link from "next/link";
 
 
 export default function ProductCard({product, noAction}:{product: Product, noAction?: boolean}) {
@@ -22,7 +23,7 @@ export default function ProductCard({product, noAction}:{product: Product, noAct
     const isAdmin =  usePathname()?.includes("/admin")
 
     return (
-        <div key={product.id} className={"border-2 border-black p-4"} ref={cardRef}>
+        <div key={product.id} className={"border-2 border-black p-4 flex flex-col w-[500px]"} ref={cardRef}>
             <h2>name: {product.name}</h2>
             <p>description: {product.description}</p>
             <p>price: ${product.price}</p>
@@ -35,6 +36,7 @@ export default function ProductCard({product, noAction}:{product: Product, noAct
             {!noAction && images.map((image) => image)}
             </div>
             {!isAdmin && <button className={"bg-blue-500"} onClick={()=>addToCart(product.id)}>Add to cart</button>}
+            {isAdmin && <Link className="px-4 py-2 bg-blue-500 text-white" href={`/admin/products/${product.id}`}>Edit</Link>}
             {/*{isAdmin && !noAction && <button onClick={()=>removeProduct(product.id)} className={"bg-red-500"}>Delete</button>}*/}
         </div>
     )

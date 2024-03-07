@@ -4,6 +4,7 @@ import Credentials from "next-auth/providers/credentials";
 import {z} from "zod";
 import {db} from "@/db";
 import bcrypt from "bcrypt";
+import {deleteCartIfAdmin} from "@/actions/auth";
 
 export const { auth, signIn, signOut } = NextAuth({
     ...authConfig,
@@ -14,7 +15,7 @@ export const { auth, signIn, signOut } = NextAuth({
                     .object({email: z.string().email(), password: z.string()})
                     .safeParse(credentials);
 
-                console.log(parsedCredentials);
+                // console.log(parsedCredentials);
 
                 if(parsedCredentials.success){
                     const {email, password} = parsedCredentials.data;
@@ -40,6 +41,9 @@ export const { auth, signIn, signOut } = NextAuth({
                         const user: Session["user"] = {
                             name: role.name,
                             email: client.email,
+                        }
+                        if(role.name === "admin"){
+                            deleteCartIfAdmin();
                         }
                         return user;
                     } else {

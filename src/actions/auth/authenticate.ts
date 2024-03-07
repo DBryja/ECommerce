@@ -2,14 +2,13 @@
 
 import { signIn } from '@/auth';
 import { AuthError } from 'next-auth';
-
-// ...
+import {cookies} from "next/headers";
 
 export async function authenticate(
     prevState: string | undefined,
     formData: FormData,
 ) {
-    console.log(formData);
+    // console.log(formData);
     try {
         await signIn('credentials', formData);
     } catch (error) {

@@ -16,8 +16,8 @@ export default function FiltersForm({children}:{children: React.ReactNode}){
 
     return (
         <div>
-            <form className={"flex flex-col gap-y-4 w-96"} action={""}>
-                <select className={"text-sm sm:text-base relative w-full border rounded placeholder-gray-400 focus:border-indigo-400 focus:outline-none py-2 px-2"} name="category" onChange={handleSearch} defaultValue={values.category}>
+            <form className={"flex flex-row gap-x-4 h-min"} action={""}>
+                <select className={"text-sm sm:text-base relative border rounded placeholder-gray-400 focus:border-indigo-400 focus:outline-none h-auto px-8 my-5"} name="category" onChange={handleSearch} defaultValue={values.category}>
                     {children}
                 </select>
                 <Input type="number" name="priceMin" placeholder="Min price" onChange={handleSearch} defaultValue={values.priceMin}/>

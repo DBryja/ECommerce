@@ -13,7 +13,7 @@ export default async function ProductsList({params}: IProductsList){
     const products = await fetchProducts(params);
 
     return (
-        <div className={"flex flex-col gap-y-4 w-full"}>
+        <div className={"flex flex-row gap-y-4 w-full flex-wrap gap-x-8"}>
             {products.length === 0 && <p>No products found</p>}
         {products.map((product : Product) =>{
             return (

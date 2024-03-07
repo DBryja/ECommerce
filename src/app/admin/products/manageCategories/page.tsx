@@ -13,7 +13,7 @@ export default async function ManageCategories(){
         <div className={"w-96"}>
             <ul>
             {categories.map((cat)=> {
-                return <li key={cat.id} className={"text-sm sm:text-base relative w-full border rounded py-2 px-2 bg-white mb-4 flex justify-between"}>
+                return <li key={cat.id} className={"text-sm sm:text-base relative w-full border rounded py-2 px-2 bg-white mb-4 flex justify-between items-center"}>
                     {cat.name}
                     <RemoveCategoryButton id={cat.id}/>
                 </li>

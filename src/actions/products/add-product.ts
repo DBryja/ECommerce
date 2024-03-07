@@ -97,6 +97,7 @@ export async function createProduct(formState : CreateProductFormState, formData
             errorHandling(error);
         }
     }
-    
+
+    revalidatePath(paths.adminProducts())
     return {errors: {}, success: true};
 }

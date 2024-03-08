@@ -10,7 +10,7 @@ export const authConfig = {
             const isAdmin = auth?.user.name === "admin" //must be using name instead of role
             const isOnDashboard = nextUrl.pathname.startsWith("/admin") || nextUrl.pathname.startsWith("/products");
 
-            //adminPath
+            // adminPath
             if(isAdmin){
                 if(isOnDashboard) return isLoggedIn;
                 else if(isLoggedIn) return Response.redirect(new URL('/admin', nextUrl));

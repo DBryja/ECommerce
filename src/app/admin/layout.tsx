@@ -5,7 +5,8 @@ const links = [
     {name: "Add Products", href: "/admin/products/add"},
     {name: "Manage Products", href: "/admin/products"},
     {name: "Add Employee", href: "/admin/addEmployee"},
-    {name: "Manage Categories", href: "/admin/products/manageCategories"}
+    {name: "Manage Categories", href: "/admin/products/manageCategories"},
+    {name: "Manage Orders", href: "/admin/manageOrders"},
 ]
 
 export default function Layout({children} : {children: React.ReactNode}){

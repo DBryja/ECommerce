@@ -7,10 +7,11 @@ interface InputProps {
     type?: InputType;
     defaultValue?: string | number | undefined;
     label?: string;
+    required? :boolean;
     [key: string]: any;
 }
 
-export default function Input({name, placeholder, label, errors, type, defaultValue, id, onChange}: InputProps) {
+export default function Input({name, placeholder, label, errors, type, defaultValue, id, onChange, required}: InputProps) {
         if(!id) id = name;
         if(!label) label = placeholder;
     return (
@@ -27,6 +28,7 @@ export default function Input({name, placeholder, label, errors, type, defaultVa
                        defaultValue={defaultValue}
                        value={type === "submit" ? defaultValue : undefined}
                        onChange={onChange}
+                       required={required}
                        className="text-sm sm:text-base relative w-full border rounded placeholder-gray-400 focus:border-indigo-400 focus:outline-none py-2 px-2"/>
 
                 <p className="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1">

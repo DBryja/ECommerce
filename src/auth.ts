@@ -4,7 +4,7 @@ import Credentials from "next-auth/providers/credentials";
 import {z} from "zod";
 import {db} from "@/db";
 import bcrypt from "bcrypt";
-import {deleteCartIfAdmin} from "@/actions/auth";
+import {deleteCart} from "@/actions/auth";
 
 export const { auth, signIn, signOut } = NextAuth({
     ...authConfig,
@@ -41,9 +41,11 @@ export const { auth, signIn, signOut } = NextAuth({
                         const user: Session["user"] = {
                             name: role.name,
                             email: client.email,
+                            id: client.id,
+                            image: client.id,
                         }
                         if(role.name === "admin"){
-                            deleteCartIfAdmin();
+                            deleteCart();
                         }
                         return user;
                     } else {

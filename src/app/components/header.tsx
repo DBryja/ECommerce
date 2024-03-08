@@ -13,6 +13,8 @@ export default async function Header(){
             <Link href={"/auth/register"}>Register</Link>
             <Link href={"/admin"}>AdminDashboard</Link>
 
+            {session?.user && <Link href={`/${session.user.image}`} className={"font-bold text-blue-500"}>{session.user.name} :: {session.user.email}</Link>}
+
             {session?.user &&
                 <form action={async () => {
                     'use server';

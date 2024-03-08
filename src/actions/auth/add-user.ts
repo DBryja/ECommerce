@@ -11,6 +11,7 @@ interface addUserFormState {
         confirmPassword?: string[];
         _form?: string[];
     };
+    success?: boolean;
 }
 
 const addUserFormState = z.object({
@@ -46,6 +47,6 @@ export async function addUser(formState : addUserFormState, formData : FormData,
         return errorHandling(e);
     }
 
-    return {errors: {}};
+    return {errors: {}, success: true};
 }
 

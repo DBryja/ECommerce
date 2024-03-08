@@ -3,14 +3,20 @@ import {useFormState} from "react-dom";
 import * as actions from "@/actions/auth";
 import React from "react";
 import Input from "@/app/components/Input";
+import {useRouter} from "next/navigation"
 
 type Role = "admin" | "customer";
 interface AddUserFormProps {
     role: Role
 }
 export default function AddUserForm({role}: AddUserFormProps){
+    const router = useRouter();
     const roleId = role === "admin" ? 1 : 0;
     const [formState, action] = useFormState(actions.addUser.bind(roleId), {errors: {}});
+    if (formState.success && role !== "admin") {
+        router.push("/auth");
+    }
+
 
     return (
         <div>

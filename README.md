@@ -1,36 +1,60 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# An e-commerce application 
 
-## Getting Started
 
-First, run the development server:
+- [Technical Information](#technical-information)
+    - [Built with](#built-with)
+    - [Features](#features)
+- [My process](#my-process)
+- [Author](#author)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Technical information
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Built with
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Next.js 14, 
+- Prisma with SQLite,
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### Features
 
-## Learn More
+-  **Authorization**
+    - User can register and log in as a client
+    - User can log in as an admin
+    - Different roles have access to different pages
 
-To learn more about Next.js, take a look at the following resources:
+-  **Admin Panel**
+    -  Add and remove products, 
+    -  Add and remove categories,
+    -  Access and filter all orders,
+    -  Add other admins
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Client**:
+    - Search for products in chosen category and filter them by price,
+    - Add products to cart,
+    - Place an order, (lacks payment system),
+    - Access own orders,
+    - 
+- **Database**:
+    - Users,
+    - Products,
+    - Orders,
+    - Shipping Details,
+    - Categories,
+    - Enums (OrderStatus, Role)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- **Data Fetching**:
+    - Data is fetched on the server side using server actions.
+    - Some of the data like categories and single products  are cached.
+    - Registered users shipping details are stored in the database and update if any changes are made on another order.
 
-## Deploy on Vercel
+Upon adding new product its details are kept in the database and images are saved in the public folder under its ID.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## My Process
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+This was my first self-made project using Next.js and Prisma.
+I have made this project to learn key concepts of these technologies, and to get familiar with the development process of a full-stack application.
+I have left this application in a mid-stage of development as I was not satisfied with the outcome, as It doesn't reflect real world standards.
+
+## Author
+
+- https://github.com/DBryja/
+- https://www.linkedin.com/in/dawid-bryja-898134249/
